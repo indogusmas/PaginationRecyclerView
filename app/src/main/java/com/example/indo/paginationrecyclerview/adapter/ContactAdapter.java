@@ -77,11 +77,24 @@ public class ContactAdapter  extends  RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
+        if (viewHolder instanceof UserViewHolder){
+            Contact contact = contacts.get(i);
+            UserViewHolder userViewHolder = (UserViewHolder)viewHolder;
+            userViewHolder.phone.setText(contact.getPhone());
+            userViewHolder.email.setText(contact.getEmail());
+        }else  if (viewHolder instanceof  LoaingViewHolder){
+            LoaingViewHolder  loaingViewHolder = (LoaingViewHolder)viewHolder;
+            loaingViewHolder.progressBar.setIndeterminate(true);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        return contacts == null ? 0: contacts.size();
+    }
+    public  void setLoaded(){
+        isLoading = true;
     }
 
 
